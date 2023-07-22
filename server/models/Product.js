@@ -21,6 +21,13 @@ const ProductSchema = new mongoose.Schema({
         required : true,
         trim : true
     },
+    image : {
+        type : String,
+    },
+    stock : {
+        type : Number,
+        required :true,
+    },
     createdAt : {
         type: Date,
         default: Date.now(),

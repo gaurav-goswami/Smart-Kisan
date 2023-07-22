@@ -1,5 +1,5 @@
-import ErrorHandler from "../utils/ErrorHandler";
-import { verifyToken } from "../utils/jwtToken";
+const ErrorHandler = require("../utils/ErrorHandler");
+const { verifyToken } = require("../utils/jwtToken");
 
 exports.isAuth = (req, res, next) => {
     try {

@@ -7,6 +7,9 @@ const fileUpload = require("express-fileupload");
 const cloudinaryConnect = require("./config/cloudinary");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
+// routes import 
+const AuthRouter = require("./routes/Auth");
+const ProductRoute = require("./routes/Product");
 
 dotenv.config({
     path: "./config/config.env"
@@ -31,6 +34,10 @@ app.use(
 )
 
 cloudinaryConnect();
+
+// using routes
+app.use("/api/v1/auth" , AuthRouter);
+app.use("/api/v1/product" , ProductRoute);
 
 const PORT = process.env.PORT;
 
