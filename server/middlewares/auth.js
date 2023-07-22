@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
 import ErrorHandler from "../utils/ErrorHandler";
+import { verifyToken } from "../utils/jwtToken";
 
 exports.isAuth = (req, res, next) => {
     try {
@@ -11,7 +11,8 @@ exports.isAuth = (req, res, next) => {
 
         try {
 
-            // if the token is verified then we'll store the user details in req object
+            const decoded_payload = verifyToken(token);
+            req.user = decoded_payload;
 
         } catch (error) {
             console.log("error in isAuth middleware", error);

@@ -4,7 +4,8 @@ const otpGenerator = require("otp-generator");
 const ErrorHandler = require("../utils/ErrorHandler");
 const otpVerificationMail = require("../utils/otpVerificationMail");
 const bcrypt = require("bcryptjs");
-const { generateToken } = require("../utils/generateJwtToken");
+const { generateToken } = require("../utils/jwtToken");
+const { destroyOTPJob } = require("../utils/cron");
 
 exports.sendOtp = async (req, res, next) => {
     try {
@@ -23,6 +24,9 @@ exports.sendOtp = async (req, res, next) => {
         await otpVerificationMail(email, otp);
 
         await OTP.create({ email, otp });
+
+        // cron-job here to delete otp automatically after 5 minutes
+        await destroyOTPJob(next, otp._id);
 
         return res.status(200).json({
             success: true,
@@ -52,7 +56,7 @@ exports.signup = async (req, res, next) => {
         if (latestOtp.length === 0) {
             return next(new ErrorHandler("Otp not found", 404))
         } else if (otp !== latestOtp[0].otp) {
-            return next(new ErrorHandler("Otp did not match", 401))
+            return next(new ErrorHandler("Otp did not match or otp expired", 401))
         }
 
         let hashedPassword;
