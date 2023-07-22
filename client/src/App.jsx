@@ -1,33 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import CommodityPricePage from './pages/CommodityPricePage'
+import LabTestPage from './pages/LabTestPage'
+import SellCommodityPage from './pages/SellCommodityPage'
+import BuyCommodityPage from './pages/BuyCommodityPage'
+import StorePage from './pages/StorePage'
+import EducationPage from './pages/EducationPage'
+import TipsPage from './pages/TipsPage'
+import NewsPage from './pages/NewsPage'
+import AuthPage from './pages/AuthPage'
+import ErrorPage from './pages/ErrorPage'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />}/>
+          <Route path='/commodity/commodity-price' element={<CommodityPricePage />}/>
+          <Route path='/lab-test' element={<LabTestPage />}/>
+          <Route path='/commodity/sell-commodity' element={<SellCommodityPage />}/>
+          <Route path='/commodity/buy-commodity' element={<BuyCommodityPage />}/>
+          <Route path='/farmer/store' element={<StorePage />}/>
+          <Route path='/farmer/education' element={<EducationPage />}/>
+          <Route path='/farming/tips' element={<TipsPage />}/>
+          <Route path='/farming/news' element={<NewsPage />}/>
+          <Route path='/auth' element={<AuthPage />}/>
+          <Route path='*' element={<ErrorPage />}/>
+        </Routes>      
+      </BrowserRouter>
     </>
   )
 }
