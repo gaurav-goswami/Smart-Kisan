@@ -3,7 +3,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const cron = require("node-cron");
 
 
-exports.destroyOTPJob = (next, Otp) => {
+exports.destroyOTPJob = async (next, Otp) => {
 
     let expression = "*/5 * * * *";
 

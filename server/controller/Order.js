@@ -15,7 +15,9 @@ exports.createOrder = async (req, res, next) => {
 
         if (!product) return next(new ErrorHandler("Product not found", 404));
 
-        if (id === product.seller._id) return next(new ErrorHandler("Seller cannot purchase their own product", 401));
+        console.log("seller id is" , product.seller._id);
+        console.log("id" , id);
+        if (id === product.seller._id.toString()) return next(new ErrorHandler("Seller cannot purchase their own product", 401));
 
         if (product.stock >= quantity) {
 

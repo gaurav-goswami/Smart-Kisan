@@ -11,7 +11,7 @@ exports.createCommodity = async (req, res, next) => {
 
         const { id } = req.user;
 
-        if (!commodityName || !rate || !minimumQuantity || !stock || !commodityImage) return next(new ErrorHandler("All fields are required", 401));
+        if (!commodityName || !rate || !minimumQuantity || !stock || !commodityImg) return next(new ErrorHandler("All fields are required", 401));
 
         let commodityImage;
 
@@ -24,7 +24,7 @@ exports.createCommodity = async (req, res, next) => {
             return next(new ErrorHandler("Something went wrong please try again later.", 403))
         }
 
-        const commodity = await Product.create({ commodityName, rate, minimumQuantity, image: commodityImage.secure_url, stock });
+        const commodity = await Product.create({ commodityName, rate, minimumQuantity, image: commodityImage.secure_url, stock, seller : id });
 
         await User.findByIdAndUpdate({ _id: id }, { $push: { products: commodity._id } }, { new: true });
 
@@ -66,7 +66,7 @@ exports.searchProduct = async (req, res, next) => {
     }
 };
 
-exports.productDetails = async () => {
+exports.productDetails = async (req, res, next) => {
     try {
         
         const {product_id} = req.body;

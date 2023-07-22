@@ -17,15 +17,19 @@ exports.sendOtp = async (req, res, next) => {
 
         if (user) return next(new ErrorHandler("User already exists", 401));
 
-        let otp = otpGenerator.generate(4, {
-            digits: true
+        let otpOptions = otpGenerator.generate(4, {
+            digits: true,
+            lowerCaseAlphabets : false,
+            upperCaseAlphabets : false,
+            specialChars : false
         })
 
-        await otpVerificationMail(email, otp);
-
-        await OTP.create({ email, otp });
-
+        
+        let otp = await OTP.create({ email, otp : otpOptions });
+        
         // cron-job here to delete otp automatically after 5 minutes
+        
+        await otpVerificationMail(email, otp.otp);
         await destroyOTPJob(next, otp._id);
 
         return res.status(200).json({
@@ -46,7 +50,7 @@ exports.signup = async (req, res, next) => {
 
         if (!firstName || !lastName || !email || !password || !contactNumber || !state || !city || !otp) return next(new ErrorHandler("All fields are required", 403));
 
-        let user = await User.findOne({ emai });
+        let user = await User.findOne({ email });
 
         if (user) return next(new ErrorHandler("User already exists. Please Login", 400));
 
@@ -97,7 +101,7 @@ exports.signup = async (req, res, next) => {
     }
 }
 
-exports.login = async () => {
+exports.login = async (req, res, next) => {
     try {
 
         const { email, password } = req.body;
@@ -142,6 +146,11 @@ exports.logout = (req, res, next) => {
     try {
 
         res.clearCookie("token");
+
+        return res.status(200).json({
+            success : true,
+            message : "Logged out"
+        })
 
     } catch (error) {
         console.log("Error in logout" , error);

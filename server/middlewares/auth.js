@@ -5,8 +5,7 @@ exports.isAuth = (req, res, next) => {
     try {
 
         const { token } = req.cookies;
-
-        console.log("token is", token);
+        
         if (!token || token === null) return next(new ErrorHandler("User is not authenticated", 401));
 
         try {
