@@ -11,6 +11,7 @@ import TipsPage from './pages/TipsPage'
 import NewsPage from './pages/NewsPage'
 import AuthPage from './pages/AuthPage'
 import ErrorPage from './pages/ErrorPage'
+import ColdStorage from './pages/ColdStorage'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/' element={<HomePage />}/>
           <Route path='/commodity/commodity-price' element={<CommodityPricePage />}/>
           <Route path='/lab-test' element={<LabTestPage />}/>
+          <Route path='/cold-storage' element={<ColdStorage />}/>
           <Route path='/commodity/sell-commodity' element={<SellCommodityPage />}/>
           <Route path='/commodity/buy-commodity' element={<BuyCommodityPage />}/>
           <Route path='/farmer/store' element={<StorePage />}/>
