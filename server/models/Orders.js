@@ -12,6 +12,10 @@ const OrderSchema = new mongoose.Schema({
         ref : "Product",
         required : true
     },
+    quantity : {
+        type : Number,
+        required : true
+    },
 
     // the person who has made the order
     user : {
@@ -26,5 +30,5 @@ const OrderSchema = new mongoose.Schema({
     }
 })
 
-const Order = mongoose.Schema("Order" , OrderSchema);
+const Order = mongoose.model("Order" , OrderSchema);
 module.exports = Order;

@@ -10,6 +10,8 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 // routes import 
 const AuthRouter = require("./routes/Auth");
 const ProductRoute = require("./routes/Product");
+const CommodityRoute = require("./routes/Commodity");
+const OrderRoute = require("./routes/Order");
 
 dotenv.config({
     path: "./config/config.env"
@@ -37,7 +39,9 @@ cloudinaryConnect();
 
 // using routes
 app.use("/api/v1/auth" , AuthRouter);
-app.use("/api/v1/product" , ProductRoute);
+app.use("/api/v1/product", ProductRoute);
+app.use("/api/v1/commodity", CommodityRoute);
+app.use("/api/v1/order" , OrderRoute);
 
 const PORT = process.env.PORT;
 
