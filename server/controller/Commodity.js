@@ -5,12 +5,15 @@ exports.getCommodityRates = async (req, res, next) => {
 
     try {
 
-        const { state, district, market, commodity } = req.body;
-        if (!state || !commodity || !market || !commodity) return next(new ErrorHandler("All fields are required"));
+        const { state, commodityName } = req.query;
 
-        const url = `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=${process.env.COMMODITY_API_KEY}&format=json&limit=300&filters%5Bstate%5D=${state}&filters%5Bdistrict%5D=${district}&filters%5Bmarket%5D=${market}&filters%5Bcommodity%5D=${commodity}`
+        if (!state || !commodityName) return next(new ErrorHandler("All fields are required"));
+
+        const url = `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=${process.env.COMMODITY_API_KEY}&format=json&limit=300&filters%5Bstate%5D=${state}&filters%5Bcommodity%5D=${commodityName}`
 
         const response = await axios.get(url)
+
+        console.log(response.data?.records);
 
         return res.status(200).json({
             success: true,
@@ -21,7 +24,7 @@ exports.getCommodityRates = async (req, res, next) => {
 
     } catch (error) {
         console.log("Error while fetching rates", error);
-        return next(new ErrorHandler("Something went wrong while fetching data"));
+        return next(new ErrorHandler("Something went wrong while fetching data" , 401));
     }
 
 }

@@ -19,16 +19,16 @@ exports.sendOtp = async (req, res, next) => {
 
         let otpOptions = otpGenerator.generate(4, {
             digits: true,
-            lowerCaseAlphabets : false,
-            upperCaseAlphabets : false,
-            specialChars : false
+            lowerCaseAlphabets: false,
+            upperCaseAlphabets: false,
+            specialChars: false
         })
 
-        
-        let otp = await OTP.create({ email, otp : otpOptions });
-        
+
+        let otp = await OTP.create({ email, otp: otpOptions });
+
         // cron-job here to delete otp automatically after 5 minutes
-        
+
         await otpVerificationMail(email, otp.otp);
         await destroyOTPJob(next, otp._id);
 
@@ -91,7 +91,14 @@ exports.signup = async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            message: "User registered successfully"
+            message: "User registered successfully",
+            token,
+            user: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                profile: user.profile,
+            }
         })
 
 
@@ -129,7 +136,14 @@ exports.login = async (req, res, next) => {
 
             return res.status(200).json({
                 success: true,
-                message: "Logged In"
+                message: "Logged In",
+                token,
+                user: {
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    profile: user.profile,
+                }
             })
 
         } else {
@@ -148,12 +162,12 @@ exports.logout = (req, res, next) => {
         res.clearCookie("token");
 
         return res.status(200).json({
-            success : true,
-            message : "Logged out"
+            success: true,
+            message: "Logged out"
         })
 
     } catch (error) {
-        console.log("Error in logout" , error);
+        console.log("Error in logout", error);
         return next(new ErrorHandler());
     }
 }

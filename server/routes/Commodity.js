@@ -3,6 +3,6 @@ const { isAuth } = require("../middlewares/auth");
 
 const router = require("express").Router();
 
-router.get("/daily-commodity-rates" , isAuth, getCommodityRates);
+router.get("/daily-commodity-rates/:commodityName/:state" , isAuth, getCommodityRates);
 
 module.exports = router;

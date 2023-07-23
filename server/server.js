@@ -19,29 +19,29 @@ dotenv.config({
 
 const app = express()
 
-connectDb();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: `${process.env.CLIENT_URL}`,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}))
 app.use(
     fileUpload({
         useTempFiles: true,
         tempFileDir: "/tmp",
     })
 )
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}))
 
+connectDb();
 cloudinaryConnect();
 
 // using routes
-app.use("/api/v1/auth" , AuthRouter);
+app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/product", ProductRoute);
 app.use("/api/v1/commodity", CommodityRoute);
-app.use("/api/v1/order" , OrderRoute);
+app.use("/api/v1/order", OrderRoute);
 
 const PORT = process.env.PORT;
 
