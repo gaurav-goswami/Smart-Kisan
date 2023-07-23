@@ -3,21 +3,20 @@ import {setupListeners} from "@reduxjs/toolkit/dist/query";
 
 import authSlice from "../features/Auth";
 import userSlice from "../features/UserDetails";
-
+import commoditySlice from "../features/CommoditySlice";
 
 import AuthApi from "../../services/AuthApi";
-import commodityApi from "../../services/CommodityApi";
 
 const store = configureStore({
 
     reducer : {
         auth : authSlice,
         userDetails : userSlice,
+        commodityDetails : commoditySlice,
         [AuthApi.reducerPath] : AuthApi.reducer,
-        [commodityApi.reducerPath] : commodityApi.reducer,
     },
 
-    middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat([AuthApi.middleware, commodityApi.middleware])
+    middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat([AuthApi.middleware])
 
 })
 

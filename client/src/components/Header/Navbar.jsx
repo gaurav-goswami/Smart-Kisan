@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full bg-white fixed top-0 flex justify-between px-6 py-2 items-center h-[40px] z-10">
+      <nav className="w-full bg-white fixed top-0 flex justify-between px-6 py-2 items-center h-[40px] z-20">
         <Link to="/" className="text-2xl font-bold text-[#266f38]">
           Smart-Kisan
         </Link>
