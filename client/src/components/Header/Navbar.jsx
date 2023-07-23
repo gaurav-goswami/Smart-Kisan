@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
 import SubLink from "./SubLink";
-import { Link } from "react-router-dom";
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../lib/Auth";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -24,10 +31,21 @@ const Navbar = () => {
     { name: "Login", path: "/auth/login" },
   ];
 
+  const location = useLocation();
+  const matchRoute = (route) => {
+    return matchPath({ path: route }, location.pathname);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout(navigate));
+  }
+
   return (
     <>
       <nav className="w-full bg-white fixed top-0 flex justify-between px-6 py-2 items-center h-[40px] z-10">
-        <Link to="/" className="text-2xl font-bold text-[#266f38]">Smart-Kisan</Link>
+        <Link to="/" className="text-2xl font-bold text-[#266f38]">
+          Smart-Kisan
+        </Link>
 
         {isOpen ? (
           <IoIosClose
@@ -50,12 +68,36 @@ const Navbar = () => {
             return <SubLink {...item} key={index} isOpen={isOpen} />;
           })}
 
-          {
+          {token === null || !token ? (
             authLink.map((item, index) => {
-              return <SubLink {...item} key={index} isOpen={isOpen} />
+              return <SubLink {...item} key={index} isOpen={isOpen} />;
             })
-          }
-          
+          ) : (
+            <>
+              <Link to="/account">
+                <li
+                  className={`list-none p-2 my-3 rounded-lg cursor-pointer font-semibold ${
+                    isOpen ? "" : "w-0 opacity-0 p-0 hidden"
+                  } transition-all duration-150 ease-in-out hover:bg-[#fff837] ${
+                    matchRoute("/account") ? "bg-[#4ba762] text-white" : ""
+                  }`}
+                >
+                  Account
+                </li>
+              </Link>
+
+              <li
+                className={`list-none p-2 my-3 rounded-lg cursor-pointer font-semibold ${
+                  isOpen ? "" : "w-0 opacity-0 p-0 hidden"
+                } transition-all duration-150 ease-in-out hover:bg-[#5037f3] hover:text-white ${
+                  matchRoute("/account") ? "bg-[#4ba762] text-white" : ""
+                }`}
+                onClick={handleLogout}
+              >
+                Logout
+              </li>
+            </>
+          )}
         </div>
       </nav>
     </>

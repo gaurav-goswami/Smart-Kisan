@@ -6,6 +6,7 @@ import userSlice from "../features/UserDetails";
 
 
 import AuthApi from "../../services/AuthApi";
+import commodityApi from "../../services/CommodityApi";
 
 const store = configureStore({
 
@@ -13,9 +14,10 @@ const store = configureStore({
         auth : authSlice,
         userDetails : userSlice,
         [AuthApi.reducerPath] : AuthApi.reducer,
+        [commodityApi.reducerPath] : commodityApi.reducer,
     },
 
-    middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat([AuthApi.middleware])
+    middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat([AuthApi.middleware, commodityApi.middleware])
 
 })
 

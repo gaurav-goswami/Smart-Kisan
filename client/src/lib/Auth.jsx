@@ -1,8 +1,8 @@
 import { toast } from "react-hot-toast";
 import { setToken, setLoading, setUserDetails } from "../app/features/Auth";
+import axios from "axios";
 
 export function sendOTP(otpFunc, email, navigate) {
-
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -83,11 +83,21 @@ export function loginUser(loginFunc, loginDetails, navigate) {
 }
 
 export function logout(navigate) {
-  return (dispatch) => {
-    dispatch(setToken(""));
+  return async (dispatch) => {
+    try {
 
-    localStorage.removeItem("token");
-    toast.success("Logged Out");
+      await axios.get(`${import.meta.env.VITE_REACT_APP_SERVER_URL}/auth/logout` , {withCredentials : true})
+
+      dispatch(setToken(""));
+      dispatch(setUserDetails(""));
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("userDetails");
+      toast.success("Logged Out");
+    } catch (error) {
+      console.log("Error while logging out", error);
+      toast.error("Something went wrong");
+    }
 
     navigate("/");
   };
