@@ -37,6 +37,7 @@ const LoginPage = () => {
               placeholder="Enter email ID"
               className="py-3 px-2 outline-none w-[100%]"
               onChange={handleChange}
+              autoComplete="off"
             />
             <input
               name="password"
@@ -45,6 +46,7 @@ const LoginPage = () => {
               placeholder="Enter password"
               className="py-3 px-2 outline-none w-[100%]"
               onChange={handleChange}
+              autoComplete="off"
             />
 
             <button

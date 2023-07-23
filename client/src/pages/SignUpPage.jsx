@@ -50,6 +50,7 @@ const SignUpPage = () => {
               value={signUpDetails.firstName}
               onChange={handleChange}
               required
+              autoCapitalize="off"
             />
             <input
               name="lastName"
@@ -59,6 +60,7 @@ const SignUpPage = () => {
               value={signUpDetails.lastName}
               onChange={handleChange}
               required
+              autoCapitalize="off"
             />
 
             <input
@@ -69,6 +71,7 @@ const SignUpPage = () => {
               value={signUpDetails.email}
               onChange={handleChange}
               required
+              autoCapitalize="off"
             />
             <input
               name="password"
@@ -78,6 +81,7 @@ const SignUpPage = () => {
               value={setSignUpDetails.password}
               onChange={handleChange}
               required
+              autoCapitalize="off"
             />
 
             <select
@@ -104,6 +108,7 @@ const SignUpPage = () => {
               value={signUpDetails.city}
               onChange={handleChange}
               required
+              autoCapitalize="off"
             />
 
             <input
@@ -114,6 +119,7 @@ const SignUpPage = () => {
               value={signUpDetails.contactNumber}
               onChange={handleChange}
               required
+              autoCapitalize="off"
             />
 
             <button
