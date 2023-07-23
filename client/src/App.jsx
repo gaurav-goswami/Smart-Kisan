@@ -17,6 +17,7 @@ import VerifyEmail from './pages/VerifyEmail'
 
 import HomeRedirect from './Redirect/HomeRedirect'
 import LoginRedirect from './Redirect/LoginRedirect'
+import Account from './pages/Account'
 
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path='/commodity/buy-commodity' element={<BuyCommodityPage />}/>
             <Route path='/commodity/commodity-price' element={<CommodityPricePage />}/>
             <Route path='/farmer/store' element={<StorePage />}/>
+            <Route path='/account' element={<Account />}/>
           </Route>
 
           <Route path='/' element={<HomePage />}/>
