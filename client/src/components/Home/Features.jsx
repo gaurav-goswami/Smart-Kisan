@@ -20,7 +20,7 @@ const Features = () => {
 
     return (
         <>
-            <div className='flex flex-col flex-wrap p-2 w-screen  bg-green-700 mx-auto gap-4 justify-center'>
+            <div className='flex flex-col flex-wrap p-2 w-screen bg-green-700 mx-auto gap-8 justify-center'>
 
                 <h2 className='text-center text-3xl font-bold text-gray-300'>Smart-Kisan Features</h2>
                 <div className='flex flex-wrap p-2 gap-4 justify-center w-[100%]'>

@@ -20,8 +20,8 @@ const Navbar = () => {
   ];
 
   const authLink = [
-    { name: "Sign Up", path: "/auth" },
-    { name: "Login", path: "/auth" },
+    { name: "Sign Up", path: "/auth/signup" },
+    { name: "Login", path: "/auth/login" },
   ];
 
   return (
@@ -49,6 +49,13 @@ const Navbar = () => {
           {navLinks.map((item, index) => {
             return <SubLink {...item} key={index} isOpen={isOpen} />;
           })}
+
+          {
+            authLink.map((item, index) => {
+              return <SubLink {...item} key={index} isOpen={isOpen} />
+            })
+          }
+          
         </div>
       </nav>
     </>

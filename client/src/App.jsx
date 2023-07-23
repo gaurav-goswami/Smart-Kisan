@@ -9,9 +9,11 @@ import StorePage from './pages/StorePage'
 import EducationPage from './pages/EducationPage'
 import TipsPage from './pages/TipsPage'
 import NewsPage from './pages/NewsPage'
-import AuthPage from './pages/AuthPage'
 import ErrorPage from './pages/ErrorPage'
 import ColdStorage from './pages/ColdStorage'
+import LoginPage from './pages/LoginPage'
+import SignUpPage from './pages/SignUpPage'
+import VerifyEmail from './pages/VerifyEmail'
 
 const App = () => {
   return (
@@ -28,7 +30,9 @@ const App = () => {
           <Route path='/farmer/education' element={<EducationPage />}/>
           <Route path='/farming/tips' element={<TipsPage />}/>
           <Route path='/farming/news' element={<NewsPage />}/>
-          <Route path='/auth' element={<AuthPage />}/>
+          <Route path='/auth/login' element={<LoginPage />}/>
+          <Route path='/auth/verify-email' element={<VerifyEmail />}/>
+          <Route path='/auth/signup' element={<SignUpPage />}/>
           <Route path='*' element={<ErrorPage />}/>
         </Routes>      
       </BrowserRouter>
