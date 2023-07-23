@@ -15,24 +15,35 @@ import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import VerifyEmail from './pages/VerifyEmail'
 
+import HomeRedirect from './Redirect/HomeRedirect'
+import LoginRedirect from './Redirect/LoginRedirect'
+
+
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
+
+          <Route element={<HomeRedirect />}>
+            <Route path='/auth/login' element={<LoginPage />}/>
+            <Route path='/auth/verify-email' element={<VerifyEmail />}/>
+            <Route path='/auth/signup' element={<SignUpPage />}/>  
+          </Route>
+
+          <Route element={<LoginRedirect />}>
+            <Route path='/commodity/sell-commodity' element={<SellCommodityPage />}/>
+            <Route path='/commodity/buy-commodity' element={<BuyCommodityPage />}/>
+            <Route path='/commodity/commodity-price' element={<CommodityPricePage />}/>
+            <Route path='/farmer/store' element={<StorePage />}/>
+          </Route>
+
           <Route path='/' element={<HomePage />}/>
-          <Route path='/commodity/commodity-price' element={<CommodityPricePage />}/>
           <Route path='/lab-test' element={<LabTestPage />}/>
           <Route path='/cold-storage' element={<ColdStorage />}/>
-          <Route path='/commodity/sell-commodity' element={<SellCommodityPage />}/>
-          <Route path='/commodity/buy-commodity' element={<BuyCommodityPage />}/>
-          <Route path='/farmer/store' element={<StorePage />}/>
           <Route path='/farmer/education' element={<EducationPage />}/>
           <Route path='/farming/tips' element={<TipsPage />}/>
           <Route path='/farming/news' element={<NewsPage />}/>
-          <Route path='/auth/login' element={<LoginPage />}/>
-          <Route path='/auth/verify-email' element={<VerifyEmail />}/>
-          <Route path='/auth/signup' element={<SignUpPage />}/>
           <Route path='*' element={<ErrorPage />}/>
         </Routes>      
       </BrowserRouter>
