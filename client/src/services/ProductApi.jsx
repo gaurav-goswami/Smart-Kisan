@@ -26,18 +26,6 @@ const ProductApi = createApi({
             })
         }),
 
-        // search product
-
-        searchProduct : builder.query({
-            query : ({query}) => ({
-                url : `/search-commodity/${query}`,
-                method : "GET",
-                params : {
-                    query
-                },
-            })
-        }),
-
         // product details
 
         getProductDetails : builder.query({

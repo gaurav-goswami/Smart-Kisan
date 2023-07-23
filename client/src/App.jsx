@@ -7,8 +7,6 @@ import SellCommodityPage from './pages/SellCommodityPage'
 import BuyCommodityPage from './pages/BuyCommodityPage'
 import StorePage from './pages/StorePage'
 import EducationPage from './pages/EducationPage'
-import TipsPage from './pages/TipsPage'
-import NewsPage from './pages/NewsPage'
 import ErrorPage from './pages/ErrorPage'
 import ColdStorage from './pages/ColdStorage'
 import LoginPage from './pages/LoginPage'
@@ -44,8 +42,6 @@ const App = () => {
           <Route path='/lab-test' element={<LabTestPage />}/>
           <Route path='/cold-storage' element={<ColdStorage />}/>
           <Route path='/farmer/education' element={<EducationPage />}/>
-          <Route path='/farming/tips' element={<TipsPage />}/>
-          <Route path='/farming/news' element={<NewsPage />}/>
           <Route path='*' element={<ErrorPage />}/>
         </Routes>      
       </BrowserRouter>

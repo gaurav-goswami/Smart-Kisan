@@ -22,8 +22,6 @@ const Navbar = () => {
     { name: "Buy", path: "/commodity/buy-commodity" },
     { name: "Store", path: "/farmer/store" },
     { name: "Farmer Education", path: "/farmer/education" },
-    { name: "Tips", path: "/farming/tips" },
-    { name: "News", path: "/farming/news" },
   ];
 
   const authLink = [
